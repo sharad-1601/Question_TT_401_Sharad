@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+         int windowstart = 0;
+        int windowend = 0;
+        int maxi = INT_MIN;
+        map<int , int > mp;
+        for (windowend = 0; windowend < fruits.size() ;windowend++) {
+                mp[fruits[windowend]]++;
+                while( mp.size() > 2 ) {
+                    mp[fruits[windowstart]]--;
+                    
+                    if (mp[fruits[windowstart]] == 0) {
+                        mp.erase(fruits[windowstart]);
+                    }
+                windowstart++;
+                }
+            maxi = max(maxi,windowend - windowstart +1);
+               
+        }
+        return maxi;
+    }
+};
