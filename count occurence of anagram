@@ -1,0 +1,31 @@
+class Solution{
+public:
+	int search(string pat, string txt) {
+	    // code here
+	    const int ch = 256;
+        int n = txt.length();
+        int m = pat.length();
+        int count = 0;
+        if (n < 0 || m < 0 || n < m)
+            return 0;
+ 
+        char arr[ch];
+        char ans[ch];
+        int i = 0;
+        for (; i < m; i++) {
+            ans[ch - txt[i]]++;
+            arr[ch - pat[i]]++;
+        }
+        if (equal(arr, arr + ch, ans))
+            count += 1;
+        for (; i < n; i++) {
+            ans[ch - txt[i]]++;
+            ans[ch - txt[i - m]]--;
+ 
+            if (equal(arr, arr + ch, ans))
+                count += 1;
+        }
+        return count;
+	}
+
+};
