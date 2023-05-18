@@ -1,0 +1,30 @@
+vector<long long> printFirstNegativeInteger(long long int A[],
+                                             long long int N, long long int K) {
+         vector<long long>ans;
+
+        queue<long long int> q;
+
+        long long int ws = 0, we = 0;
+         while(we < N) {
+            if (A[we] < 0) {
+                q.push(A[we]);
+            }
+
+            if (we - ws + 1 == K) { 
+                if (q.empty()) {
+                    ans.push_back(0);
+                } else {
+                    ans.push_back(q.front());
+
+                    if (q.front() == A[ws]) {
+                        q.pop();
+                    }
+                }
+                ws++; 
+            }
+            we++;
+        }
+
+        return ans;
+    }
+                                             
